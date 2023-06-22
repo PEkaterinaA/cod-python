@@ -1,0 +1,24 @@
+class Cassa:
+    summa=155250 # начальная сумма в кассе
+    
+    
+    def top_up(self, x):
+        self.x=x
+        x+=Cassa.summa
+        return f"в кассе {x}"
+    
+    
+    def count_1000(self):
+        print(Cassa.summa//1000)
+        
+        
+    def take_away(self, x):
+        if x<=self.summa:
+            self.summa-=x
+        else:      
+            return f"не достаточно денег"
+
+
+r=Cassa()
+print(r.count_1000())
+print(r.top_up(250678))
