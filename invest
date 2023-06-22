@@ -1,0 +1,13 @@
+summa=int(input("Минимальная сумма инвестиций - "))
+maikl=int(input("Долларов у Майкла - "))
+ivan=int(input("Долларов у Ивана - "))
+if (maikl>=summa) and (ivan>=summa):
+    print(2)
+elif (maikl>=summa) and (ivan<=summa):
+    print("Майкл")
+elif (maikl<=summa) and (ivan>=summa):
+    print("Иван")
+elif (maikl<=summa) and (ivan<=summa) and ((maikl+ivan)>=summa):
+    print(1)
+elif (maikl<=summa) and (ivan<=summa) and ((maikl+ivan)<=summa):
+    print(0)
