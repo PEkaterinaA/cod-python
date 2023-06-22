@@ -1,0 +1,29 @@
+slovo = input('Введите слово с гласными буквами: ')
+e=slovo.count('e')
+a=slovo.count('a')
+i=slovo.count('i')
+u=slovo.count('u')
+o=slovo.count('o')
+glasn=e+a+i+u+o
+print("всего гласных",glasn)
+print("всего согласных",len(slovo)-glasn)
+if (e==0):
+    print ("e= False")
+else:
+    print("e=",e)
+if (u==0):
+    print ("u= False")
+else:
+    print("u=",u)
+if (o==0):
+    print ("o= False")
+else:
+    print("o=",o)
+if (a==0):
+    print ("a= False")
+else:
+    print("a=",a)
+if (i==0):
+    print ("i= False")
+else:
+    print("i=",i)
