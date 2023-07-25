@@ -1,0 +1,105 @@
+import collections
+
+# Словарь с информацией о питомцах
+pets = {
+    1:
+        {
+            "Мухтар": {
+                "Вид питомца": "Собака",
+                "Возраст питомца": 9,
+                "Имя владельца": "Павел"
+            },
+        },
+    2:
+        {
+            "Каа": {
+                "Вид питомца": "желторотый питон",
+                "Возраст питомца": 19,
+                "Имя владельца": "Саша"
+            },
+        },
+}
+
+
+# Функция для создания новой записи в словаре pets
+def create():
+    last = collections.deque(pets, maxlen=1)[0] # получаем последний ключ
+    new_pet = input("Введите информацию о новом питомце в формате 'Кличка, вид, возраст, имя владельца': ").split(", ")
+    pets[last + 1] = {new_pet[0]: {"Вид питомца": new_pet[1], "Возраст питомца": int(new_pet[2]), "Имя владельца": new_pet[3]}}
+    print("Новая запись добавлена")
+
+
+# Функция для отображения информации о запрашиваемом питомце
+def read():
+    ID = int(input("Введите код питомца: "))
+    pet = get_pet(ID)
+    if pet:
+        age_suffix = get_suffix(pet[list(pet.keys())[0]]["Возраст питомца"])  # получаем суффикс для возраста
+        print(f'Это {pet[list(pet.keys())[0]]["Вид питомца"]} по кличке {list(pet.keys())[0]}. Возраст питомца: {pet[list(pet.keys())[0]]["Возраст питомца"]} {age_suffix}. Имя владельца: {pet[list(pet.keys())[0]]["Имя владельца"]}')
+    else:
+        print("Питомец с таким ID не найден")
+
+
+# Функция для обновления информации о питомце
+def update():
+    ID = int(input("Введите код питомца: "))
+    pet = get_pet(ID)
+    if pet:
+        new_info = input("Введите обновленную информацию о питомце в формате 'Кличка, вид, возраст, имя владельца': ").split(", ")
+        pet[list(pet.keys())[0]] = {"Вид питомца": new_info[1], "Возраст питомца": int(new_info[2]), "Имя владельца": new_info[3]}
+        print("Информация о питомце обновлена")
+    else:
+        print("Питомец с таким ID не найден")
+
+
+# Функция для удаления записи о питомце
+def delete():
+    ID = int(input("Введите код питомца: "))
+    if ID in pets.keys():
+        del pets[ID]
+        print("Запись о питомце удалена")
+    else:
+        print("Питомец с таким ID не найден")
+
+
+# Функция для получения информации о питомце по его ID
+def get_pet(ID):
+    return pets.get(ID, False)
+
+
+# Функция для получения правильного суффикса для возраста
+def get_suffix(age):
+    if age % 10 == 1 and age != 11:
+        return "год"
+    elif 2 <= age % 10 <= 4 and not 12 <= age % 100 <= 14:
+        return "года"
+    else:
+        return "лет"
+
+
+# Функция для вывода всего списка питомцев
+def pets_list():
+    for ID, pet in pets.items():
+        age_suffix = get_suffix(pet[list(pet.keys())[0]]["Возраст питомца"]) # получаем суффикс для возраста
+        print(f'{ID}: {list(pet.keys())[0]} вид питомца: {pet[list(pet.keys())[0]]["Вид питомца"]}. Возраст питомца: {pet[list(pet.keys())[0]]["Возраст питомца"]} {age_suffix}. Имя владельца: {pet[list(pet.keys())[0]]["Имя владельца"]}')
+
+
+# Главный цикл программы
+command = ""
+while command != "stop":
+    command = input("Введите команду (create, read, update, delete, list, stop): ")
+    if command == "create":
+        create()
+    elif command == "read":
+        read()
+    elif command == "update":
+        update()
+    elif command == "delete":
+        delete()
+    elif command == "list":
+        pets_list()
+    elif command == "stop":
+        print("Программа завершена")
+    else:
+        print("Команда не найдена")
+
